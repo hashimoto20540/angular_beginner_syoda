@@ -1,0 +1,4798 @@
+﻿単行本「Angular超入門」
+
+
+掲載リスト
+
+
+
+
+▼リスト2-1
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AngularApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+
+
+
+▼リスト2-2
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+
+
+
+
+▼リスト2-3
+<!--The content below is only a placeholder 
+    and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" 
+      src="data:image/svg+xml;base64,……略……">
+</div>
+<h2>Here are some links to help you start: </h2>
+<ul>
+  <li>
+    <h2><a target="_blank" rel="noopener" 
+      href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" 
+      href="https://angular.io/cli">CLI Documentation</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" 
+      href="https://blog.angular.io/">Angular blog</a></h2>
+  </li>
+</ul>
+
+
+
+
+▼リスト2-4
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'angular-app';
+}
+
+
+
+
+▼リスト2-5
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+
+▼リスト2-6
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { HelloComponent } from './hello/hello.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+
+▼リスト2-7
+<p>
+  hello works! 
+</p>
+
+
+
+
+▼リスト2-8
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+</div>
+
+
+
+
+▼リスト2-9
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-hello',
+  templateUrl: './hello.component.html',
+  styleUrls: ['./hello.component.css']
+})
+export class HelloComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+
+▼リスト2-10
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+  }
+
+}
+
+
+
+
+▼リスト2-11
+<body>
+  <app-hello></app-hello>
+</body>
+
+
+
+
+▼リスト2-12
+#body {
+  margin-top:75px;
+}
+h1 {
+  font-size:60pt;
+  letter-spacing: -5px;
+  color:lightblue;
+  position: absolute;
+  top:-70px;
+  right:0px;
+}
+p {
+  font-size:18pt;
+}
+
+
+
+
+▼リスト2-13
+<p>result:{{ 12300 * 1.08 }}円</p>
+
+
+
+
+▼リスト2-14
+<p>Price:{{ price * 1.08 }}円</p>
+
+
+
+
+▼リスト2-15
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  price:number;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+    this.price = 123450;
+  }
+}
+
+
+
+
+▼リスト2-16
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+  }
+
+  today() {
+    return new Date().toLocaleString();
+  }
+}
+
+
+
+
+▼リスト2-17
+<p>{{ today() }}</p>
+
+
+
+
+▼リスト2-18
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  now:Date;
+
+  constructor() {
+    setInterval(
+      ()=>{this.now = new Date();}, 1000);
+  }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+  }
+
+  today() {
+    return this.now.toLocaleString();
+  }
+}
+
+
+
+
+▼リスト2-19
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{ message }}</p>
+  <p [class]="styleClass">{{ message }}</p>
+</div>
+
+
+
+
+▼リスト2-20
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  styleClass:string;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+    this.styleClass = 'red';
+  }
+
+}
+
+
+
+
+▼リスト2-21
+.red {
+  color:white;
+  background-color: red;
+}
+
+
+
+
+▼リスト2-22
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  styleClass:string;
+
+  constructor() {
+    setInterval(
+      ()=>{ 
+        this.styleClass = this.styleClass =='red' ? '' : 'red'; 
+        console.log(this.styleClass);
+      }, 1000);
+  }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is My First Component!!';
+  }
+}
+
+
+
+
+▼リスト2-23
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  template: `
+    <div id="body">
+      <h1>{{title}}</h1>
+      <p>{{ message }}</p>
+    </div>
+  `
+})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'This is inline-template!!';
+  }
+}
+
+
+
+
+▼リスト2-24
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{ message }}</p>
+  <button (click)="doClick()">Click</button>
+</div>
+
+
+
+
+▼リスト2-25
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  templateUrl: './hello.component.html'
+})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  count:number;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = '※ボタンをクリック！';
+    this.count = 0;
+  }
+
+  doClick() {
+    this.message = ++this.count + "回、クリックしました。";
+  }
+}
+
+
+
+
+▼リスト2-26
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{ message }}</p>
+  <input type="text" #field1
+    (keyup)="doType(field1.value)" />
+</div>
+
+
+
+
+▼リスト2-27
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  input:string;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.input = '';
+    this.message = 'please type...';
+  }
+
+  doType(val:string) {
+    this.input = val;
+    this.message = 'you type: ' + this.input;
+  }
+}
+
+
+
+
+▼リスト2-28
+<div id="body">
+  <h1>{{title}}</h1>
+  <p *ngIf="visible" (click)="doClick()" 
+      class="red">This is TRUE message.</p>
+  <p *ngIf="visible == false" (click)="doClick()">
+      This is FALSE message.</p>
+</div>
+
+
+
+
+▼リスト2-29
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  visible:boolean;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.visible = true;
+    this.message = 'please type...';
+  }
+
+  doClick() {
+    this.visible = !this.visible; 
+  }
+}
+
+
+
+
+▼リスト2-30
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <ul>
+    <li *ngFor="let item of data">{{item}}</li>
+  </ul>
+</div>
+
+
+
+
+▼リスト2-31
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  data:string[];
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'data list.';
+    this.data = [
+      '最初の項目です。',
+      '２番目の項目です。',
+      '最後の項目です。'
+    ]
+  }
+}
+
+
+
+
+▼リスト2-32
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <div [ngSwitch]="switch">
+    <p *ngSwitchCase="'one'">First paragraph!</p>
+    <p *ngSwitchCase="'two'">second paragraph!</p>
+    <p *ngSwitchCase="'three'">Third paragraph!</p>
+    <p *ngSwitchDefault >default paragraph.</p>
+  </div>
+  <select #sel (change)="doSelect(sel.value)">
+    <option>one</option>
+    <option>two</option>
+    <option>three</option>
+  </select>
+</div>
+
+
+
+
+▼リスト2-33
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  switch:string;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'select menu:';
+    this.switch = "one";
+  }
+
+  doSelect(val) {
+    this.switch = val;
+  }
+}
+
+
+
+
+▼リスト2-34
+<div id="body">
+  <h1>{{title}}</h1>
+  <p
+    [style.font-size.pt]="36" 
+    [style.color]="'#F00'">{{message}}:36</p>
+  <p
+    [style.font-size.pt]="28" 
+    [style.color]="'#F99'">{{message}}:28</p>
+  <p 
+    [style.font-size.pt]="20"
+    [style.color]="'#Fcc'">{{message}}:20</p>
+</div>
+
+
+
+
+▼リスト2-35
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'Font size';
+  }
+
+
+
+
+▼リスト2-36
+.thin { color: #999; }
+.large { font-size:30pt; }
+.frame { border:solid 2px red; }
+
+
+
+
+▼リスト2-37
+<div id="body">
+  <h1>{{title}}</h1>
+  <p [ngClass]="nowClass">ngClass:{{message}}</p>
+  <input type="checkbox" #ck1 
+    (change)="check(ck1.checked, ck2.checked, ck3.checked);">Thin
+  <input type="checkbox" #ck2 
+    (change)="check(ck1.checked, ck2.checked, ck3.checked);">Large
+  <input type="checkbox" #ck3 
+    (change)="check(ck1.checked, ck2.checked, ck3.checked);">Frame
+</div>
+
+
+
+
+▼リスト2-38
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  nowClass:any;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'false,false,false';
+    this.nowClass = {
+      'thin':false,
+      'large':false,
+      'frame':false
+    };
+  }
+
+  check(c1, c2, c3) {
+    this.nowClass.thin = c1;
+    this.nowClass.large = c2;
+    this.nowClass.frame = c3;
+    this.message = c1 + ',' + c2 + ',' + c3;
+  }
+}
+
+
+
+
+▼リスト2-39
+<div id="body">
+  <h1>{{title}}</h1>
+  <p [ngStyle]="nowStyle">ngStyle:{{message}}</p>
+  <input type="text" #in1 
+    (change)="check(in1.value,in2.value, in3.value);"><br>
+  <input type="text" #in2 
+    (change)="check(in1.value, in2.value, in3.value);"><br>
+  <input type="text" #in3 
+    (change)="check(in1.value, in2.value, in3.value);"><br>
+</div>
+
+
+
+
+▼リスト2-40
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  nowStyle:any;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'false,false,false';
+    this.nowStyle = {
+      'border-style':'',
+      'border-width':'',
+      'border-color':''
+    };
+  }
+
+  check(in1, in2, in3) {
+    this.nowStyle['border-style'] = in1;
+    this.nowStyle['border-width'] = in2 + "px";
+    this.nowStyle['border-color'] = in3;
+    this.message = JSON.stringify(this.nowStyle);
+  }
+}
+
+
+
+
+▼リスト3-1
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // ★
+
+import { AppComponent } from './app.component';
+import { HelloComponent } from './hello/hello.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent
+  ],
+  imports: [
+    BrowserModule, // カンマ追加
+    FormsModule // ★
+  ],
+  providers: [],
+  bootstrap: [HelloComponent]
+})
+export class AppModule { }
+
+
+
+
+▼リスト3-2
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <p>TYPE:{{text1}}</p>
+  <input type="text" [(ngModel)]="text1" />
+</div>
+
+
+
+
+▼リスト3-3
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  templateUrl: './hello.component.html'
+})
+
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  text1:string;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'ngModelを使う';
+    this.text1 = '';
+  }
+}
+
+
+
+
+▼リスト3-4
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+
+
+▼リスト3-5
+imports: [
+  BrowserModule,
+  FormsModule,
+  ReactiveFormsModule 
+],
+
+
+
+
+▼リスト3-6
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <p>TYPE:{{myControl.value}}</p>
+  <input type="text" [formControl]="myControl" />
+</div>
+
+
+
+
+▼リスト3-7
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms'; // 追加
+
+@Component({……略……})
+
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormControl;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = new FormControl('ok.');
+  }
+}
+
+
+
+
+▼リスト3-8
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <input type="text" [formControl]="myControl" />
+  <button (click)="doClick()">Click</button>
+</div>
+
+
+
+
+▼リスト3-9
+doClick() {
+  this.message = '「' + this.myControl.value + '」と書きましたね。';
+}
+
+
+
+
+▼リスト3-10
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <form [formGroup]="myControl" 
+      (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <input type="text" formControlName="name">
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <input type="text" formControlName="mail">
+    </td></tr>
+    <tr><th>age</th><td>
+      <input type="number" formControlName="age">
+    </td></tr>
+    <tr><th></th><td>
+      <input type="submit" value="click">
+    </td></tr>
+  </table>
+  </form>
+</div>
+
+
+
+
+▼リスト3-11
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+@Component({……略……})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormGroup;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = new FormGroup({
+      name: new FormControl(''),
+      mail: new FormControl(''),
+      age: new FormControl(0)
+    });
+  }
+
+  onSubmit() {
+    let result = this.myControl.value;
+    this.message = JSON.stringify(result);
+  }
+
+}
+
+
+
+
+▼リスト3-12
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormGroup;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = new FormGroup({
+      control: new FormControl()
+    });
+  }
+
+  onSubmit() {
+    let result = this.myControl.value;
+    this.message = JSON.stringify(result);
+  }
+}
+
+
+
+
+▼リスト3-13
+<form [formGroup]="myControl" 
+      (submit)="onSubmit()">
+  <div>
+    <label><input type="checkbox" 
+      formControlName="control">Check Box</label>
+  </div>
+  <div>
+    <input type="submit" value="click">
+  </div>
+</form>
+
+
+
+
+▼リスト3-14
+<form [formGroup]="myControl" 
+      (submit)="onSubmit()">
+  <div>
+    <label><input type="radio" value="male" 
+      formControlName="control">male</label>
+    <label><input type="radio" value="female" 
+      formControlName="control">female</label>
+  </div>
+  <div>
+    <input type="submit" value="click">
+  </div>
+</form>
+
+
+
+
+▼リスト3-15
+<form [formGroup]="myControl" 
+      (submit)="onSubmit()">
+  <div>
+    <select formControlName="control">
+      <option>Windows</option>
+      <option>macOS</option>
+      <option>Linux</option>
+      <option>ChromeOS</option>
+    </select>  
+    <input type="submit" value="click">
+  </div>
+</form>
+
+
+
+
+▼リスト3-16
+<form [formGroup]="myControl" 
+      (submit)="onSubmit()">
+  <div>
+    <select formControlName="control" 
+      size="5" multiple>
+      <option>android</option>
+      <option>iOS</option>
+      <option>blackberry</option>
+      <option>symbian</option>
+      <option>Fucsia</option>
+    </select>
+  </div>
+  <div>
+    <input type="submit" value="click">
+  </div>
+</form>
+
+
+
+
+▼リスト3-17
+<form #f="ngForm" 
+    (ngSubmit)="onSubmit(f.value)">
+<table>
+  <tr><th>Name</th><td>
+    <input type="text" name="name" ngModel>
+  </td></tr>
+  <tr><th>Mail</th><td>
+    <input type="text" name="mail" ngModel>
+  </td></tr>
+  <tr><th>age</th><td>
+    <input type="number" name="age" ngModel>
+  </td></tr>
+  <tr><th></th><td>
+    <input type="submit" value="click">
+  </td></tr>
+</table>
+</form>
+
+
+
+
+▼リスト3-18
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  
+  constructor() {}
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+  }
+
+  onSubmit(val) {
+    this.message = JSON.stringify(val);
+  }
+}
+
+
+
+
+▼リスト3-19
+<form [(formGroup)]="myControl" 
+    (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <div><input type="text" formControlName="name"></div>
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <div><input type="text" formControlName="mail"></div>
+    </td></tr>
+    <tr><th>age</th><td>
+      <input type="number" formControlName="age">
+    </td></tr>
+    <tr><th></th><td>
+      <input type="submit" value="click">
+    </td></tr>
+  </table>
+</form>
+
+
+
+
+▼リスト3-20
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+@Component({……略……})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormGroup;
+  
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormBuilderを使う';
+    this.myControl = this.fb.group({
+      name: [''],
+      mail: [''],
+      age:[0]
+    });
+  }
+
+  onSubmit() {
+    let result = this.myControl.value;
+    this.message = JSON.stringify(result);  
+  }
+}
+
+
+
+
+▼リスト3-21
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({……略……})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormGroup;
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      mail: new FormControl('', [Validators.email]),
+      age:new FormControl(0, [Validators.min(1), Validators.max(150)])
+    });
+  }
+
+  get name() { return this.myControl.get('name'); }
+  get mail() { return this.myControl.get('mail'); }
+  get age() { return this.myControl.get('age'); }
+
+  onSubmit() {
+    if (this.myControl.invalid) {
+      this.message = 'VALIDATION ERROR.';
+    } else {
+      let result = this.myControl.value;
+      this.message = JSON.stringify(result);  
+    }
+  }
+
+}
+
+
+
+
+▼リスト3-22　import文の修正
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+▼リスト3-22　constructorの修正
+constructor(private fb: FormBuilder) { }
+
+▼リスト3-22　ngOnInit メソッドの修正
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = this.fb.group({
+      name: ['', [Validators.required]],
+      mail: ['', [Validators.email]],
+      age:[0, [Validators.min(1), Validators.max(150)]]
+    });
+  }
+
+
+
+
+▼リスト3-23
+<form [(formGroup)]="myControl" 
+    (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <div *ngIf="name.invalid">Nameは必須項目です.</div>
+      <div><input type="text" formControlName="name"></div>
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <div *ngIf="mail.invalid">メールアドレスが必要です.</div>
+      <div><input type="text" formControlName="mail"></div>
+    </td></tr>
+    <tr><th>age</th><td>
+        <div *ngIf="age.invalid">１歳以上150歳以下で入力下さい..</div>
+      <input type="number" formControlName="age">
+    </td></tr>
+    <tr><th></th><td>
+      <input [disabled]="myControl.invalid" 
+        type="submit" value="click">
+    </td></tr>
+  </table>
+</form>
+
+
+
+
+▼リスト3-24
+<form [(formGroup)]="myControl" 
+    (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <div *ngIf="name.errors != null && name.errors.required != null">
+          Nameは必須項目です.</div>
+      <div><input type="text" formControlName="name"></div>
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <div *ngIf="mail.errors != null && mail.errors.email != null">
+          メールアドレスが必要です.</div>
+      <div><input type="text" formControlName="mail"></div>
+    </td></tr>
+    <tr><th>age</th><td>
+        <div *ngIf="age.errors != null && age.errors.min != null">
+          １歳以上を入力下さい.</div>
+        <div *ngIf="age.errors != null && age.errors.max != null">
+          150歳以下を入力下さい.</div>
+      <input type="number" formControlName="age">
+    </td></tr>
+    <tr><th></th><td>
+      <input [disabled]="myControl.invalid" 
+        type="submit" value="click">
+    </td></tr>
+  </table>
+</form>
+
+
+
+
+▼リスト3-25
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+// 半角アルファベットのみ入力を許可
+function alpha(c: FormControl) {
+  let REGPATTERN = /^[a-zA-Z]+$/;
+  if (REGPATTERN.test(c.value)){
+    return null;
+  } else {
+    return {alpha:{valid: false }};
+  };
+}
+
+// 偶数のみ入力を許可
+function even(c: FormControl) {
+  return c.value % 2 == 0 ? null : {even:{valid:false}};
+}
+
+@Component({……略……})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  myControl:FormGroup;
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'FormControlを使う';
+    this.myControl = new FormGroup({
+      name: new FormControl('', [Validators.required, alpha]),
+      mail: new FormControl('', [Validators.email]),
+      age:new FormControl(0, [Validators.min(1), Validators.max(150), even])
+    });
+  }
+
+  get name() { return this.myControl.get('name'); }
+  get mail() { return this.myControl.get('mail'); }
+  get age() { return this.myControl.get('age'); }
+
+  error(item:FormControl) {
+    return JSON.stringify(item.errors);
+  }
+
+  onSubmit() {
+    if (this.myControl.invalid) {
+      this.message = 'VALIDATION ERROR.';
+    } else {
+      let result = this.myControl.value;
+      this.message = JSON.stringify(result);  
+    }
+  }
+
+}
+
+
+
+
+▼リスト3-26
+<form [(formGroup)]="myControl" 
+    (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <div *ngIf="name.errors != null && name.errors.required != null">
+        Nameは必須項目です.</div>
+      <div *ngIf="name.errors != null && name.errors.alpha != null">
+        半角アルファベットのみ可です.</div>
+      <div><input type="text" formControlName="name"></div>
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <div *ngIf="mail.errors != null && mail.errors.email != null">
+        メールアドレスが必要です.</div>
+      <div><input type="text" formControlName="mail"></div>
+    </td></tr>
+    <tr><th>age</th><td>
+      <div *ngIf="age.errors != null && age.errors.min != null">
+        １歳以上を入力下さい.</div>
+      <div *ngIf="age.errors != null && age.errors.max != null">
+        150歳以下を入力下さい.</div>
+      <div *ngIf="age.errors != null && age.errors.even != null">
+          偶数のみ入力可です.</div>
+      <div><input type="number" formControlName="age"></div>
+    </td></tr>
+    <tr><th></th><td>
+      <input [disabled]="myControl.invalid" 
+        type="submit" value="click">
+    </td></tr>
+  </table>
+</form>
+
+
+
+
+▼リスト3-27
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-message',
+  templateUrl: './message.component.html',
+  styleUrls: ['./message.component.css']
+})
+export class MessageComponent implements OnInit {
+  @Input() content:string;
+
+  constructor() { }
+
+  ngOnInit() { }
+
+}
+
+
+
+
+▼リスト3-28
+<div class="container">
+  <p class="message">{{content}}</p>
+</div>
+
+
+
+
+▼リスト3-29
+.container {
+  padding:0px 20px;
+  margin:10px;
+  border: 1px solid red;
+}
+.message {
+  color:#666;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+
+
+
+▼リスト3-30
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  templateUrl: './hello.component.html'
+})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = '新しいコンポーネントです。';
+  }
+
+}
+
+
+
+
+▼リスト3-31
+<div id="body">
+  <h1>{{title}}</h1>
+  <app-message [content]="message"></app-message>
+</div>
+
+
+
+
+▼リスト3-32
+export class MessageComponent implements OnInit {
+  @Input() content:string[];
+
+  constructor() { }
+
+  ngOnInit() { }
+
+}
+
+
+
+
+▼リスト3-33
+<div class="container">
+  <ul>
+    <li class="message" *ngFor="let item of content">{{item}}</li>
+  </ul>
+</div>
+
+
+
+
+▼リスト3-34
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string[];
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = [
+      '新しいコンポーネントです。',
+      '複数のメッセージを表示できます。',
+      '属性は配列を設定します。'];
+  }
+
+}
+
+
+
+
+▼リスト3-35
+export class MessageComponent implements OnInit {
+  private _content:string[];
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  @Input()
+  set content(msgs:string) {
+    this._content = msgs.split(',');
+  }
+
+  get content() {
+    return this._content.join(',');
+  }
+
+  doClick() {
+    this._content.pop();
+  }
+
+}
+
+
+
+
+▼リスト3-36
+<div class="container">
+  <ul (click)="doClick()">
+    <li class="message" *ngFor="let item of _content">{{item}}</li>
+  </ul>
+</div>
+
+
+
+
+▼リスト3-37
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'One,Two,Three,Four,Five';
+  }
+
+}
+
+
+
+
+▼リスト3-38
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({……略……})
+export class MessageComponent implements OnInit {
+  @Input() content:string[];
+  @Output() action = new EventEmitter<MouseEvent>();
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  doAction(event){
+    this.action.emit(event);
+  }
+
+}
+
+
+
+
+▼リスト3-39
+<div class="container">
+  <ul>
+    <li class="message" (click)="doAction($event)"
+      *ngFor="let item of content">{{item}}</li>
+  </ul>
+</div>
+
+
+
+
+▼リスト3-40
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string[];
+  lastTarget:any;
+  lastColor:string;
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = ['First item.', 'Second item.', 'Third item.'];
+  }
+
+  doClick(event) {
+    if (this.lastTarget != null){
+      this.lastTarget.style.color = this.lastColor;
+      this.lastTarget.style.backgroundColor = 'white';
+    }
+    this.lastTarget = event.target;
+    this.lastColor = event.target.style.color;
+    event.target.style.color = 'white';
+    event.target.style.backgroundColor = 'red';
+  }
+
+}
+
+
+
+
+▼リスト3-41
+<div id="body">
+  <h1>{{title}}</h1>
+  <app-message [content]="message" 
+      (action)="doClick($event)"></app-message>
+</div>
+
+
+
+
+▼リスト3-42
+export class MessageComponent implements OnInit {
+  @Input() content:string[];
+  @Output() action = new EventEmitter<MouseEvent>();
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  doAction(event){
+    this.action.emit(event);
+  }
+  push(item:string) {
+    this.content.push(item);
+  }
+  pop() {
+    this.content.pop();
+  }
+}
+
+
+
+
+▼リスト3-43
+<div id="body">
+  <h1>{{title}}</h1>
+  <div>add item...</div>
+  <div>
+    <input #input1 type="text">
+    <button (click)="list1.push(input1.value)">push</button>
+    <button (click)="list1.pop()">pop</button>
+  </div>
+  <hr>
+  <app-message #list1 [content]="message" 
+    (action)="doClick($event)"></app-message>
+</div>
+
+
+
+
+▼リスト3-44
+<div id="body">
+  <h1>{{title}}</h1>
+  <div>add item...</div>
+  <div>
+    <input type="text" [(ngModel)]="input1">
+    <button (click)="push()">push</button>
+    <button (click)="pop()">pop</button>
+  </div>
+  <hr>
+  <app-message [content]="message" 
+    (action)="doClick($event)"></app-message>
+</div>
+
+
+
+
+▼リスト3-45
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MessageComponent } from '../message/message.component';
+
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  templateUrl: './hello.component.html'
+})
+
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string[];
+  lastTarget:any;
+  lastColor:string;
+  input1:string;
+  @ViewChild(MessageComponent)
+  private msgComponent:MessageComponent;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = ['First item.', 'Second item.', 'Third item.'];
+    this.input1 = '';
+  }
+
+  push() {
+    if (this.input1 == '') {
+      alert('テキストを入力して下さい。');
+      return;
+    }
+    this.msgComponent.push(this.input1);
+    this.input1 = '';
+  }
+  pop() {
+    this.msgComponent.pop();
+  }
+
+  doClick(event) {
+    if (this.lastTarget != null){
+      this.lastTarget.style.color = this.lastColor;
+      this.lastTarget.style.backgroundColor = 'white';
+    }
+    this.lastTarget = event.target;
+    this.lastColor = event.target.style.color;
+    event.target.style.color = 'white';
+    event.target.style.backgroundColor = 'red';
+  }
+
+}
+
+
+
+
+▼リスト3-46
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[appMystyle]'
+})
+export class MystyleDirective {
+
+  constructor() { }
+
+}
+
+
+
+
+▼リスト3-47
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appMystyle]'
+})
+export class MystyleDirective {
+
+  constructor(el: ElementRef) {
+    el.nativeElement.style.color = 'blue';
+    el.nativeElement.style.backgroundColor = '#ddf';
+  }
+
+}
+
+
+
+
+▼リスト3-48
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>This is No-style Directive!</p>
+  <p appMystyle>This is My-style Directive!</p>
+</div>
+
+
+
+
+▼リスト3-49
+import { OnInit, Directive, ElementRef, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appMystyle]'
+})
+export class MystyleDirective implements OnInit {
+  private el:ElementRef;
+  @Input() c:string = 'blue';
+  @Input() bg:string = '#eef';
+
+  constructor(el: ElementRef) {
+    this.el = el;
+  }
+
+  ngOnInit() {
+    this.el.nativeElement.style.color = this.c;
+    this.el.nativeElement.style.backgroundColor = this.bg;
+  }
+
+}
+
+
+
+
+▼リスト3-50
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>This is No-style Directive!</p>
+  <p appMystyle>This is My-style Directive!</p>
+  <p appMystyle c="white" bg="red">This is My-style Directive!</p>
+</div>
+
+
+
+
+▼リスト3-51
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { HelloComponent } from './hello/hello.component';
+import { MessageComponent } from './message/message.component';
+import { MystyleDirective } from './mystyle.directive'; // ★
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent,
+    MessageComponent,
+    MystyleDirective // ★
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule 
+  ],
+  providers: [],
+  bootstrap: [HelloComponent]
+})
+export class AppModule { }
+
+
+
+
+▼リスト4-1
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MycheckService {
+
+  constructor() { }
+}
+
+
+
+
+▼リスト4-2
+export class MycheckService {
+
+  constructor() { }
+
+  hello(name:string) {
+    return "Hello, " + name + "!!";
+  }
+
+}
+
+
+
+
+▼リスト4-3
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+</div>
+
+
+
+
+▼リスト4-4
+import { Component, OnInit } from '@angular/core';
+import { MycheckService } from '../mycheck.Service';
+
+@Component({……略……})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor(private service:MycheckService) { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = this.service.hello('Taro');
+  }
+
+}
+
+
+
+
+▼リスト4-5
+export class MycheckService {
+  private _name:string;
+
+  constructor() {
+    this.name = '(no-name)';
+  }
+
+  get name() {
+    return this._name;
+  }
+  set name(name:string) {
+    this._name = name;
+  }
+
+  hello() {
+    return "Hello, " + this.name + "!!";
+  }
+
+}
+
+
+
+
+▼リスト4-6　※スクリプト冒頭にあるimport 文のところに、以下の文を追記しておく。
+import { MycheckService } from './mycheck.Service';
+
+▼リスト4-6　AppModule クラスの定義部分
+export class AppModule {
+  
+  constructor(private service:MycheckService) {
+    service.name = 'hanako';
+  } 
+
+}
+
+
+
+
+▼リスト4-7――hello.component.html
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+  <app-message></app-message>
+</div>
+
+
+
+
+▼リスト4-8　スクリプト冒頭のimport 文に、以下の文が追加されているか確認。
+import { MycheckService } from '../mycheck.Service';
+
+▼リスト4-8――hello.component.ts
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor(private service:MycheckService) {  }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = this.service.hello();
+  }
+
+}
+
+
+
+
+▼リスト4-9――message.component.html（リスト3-38で修正したまま）
+<div class="container">
+  <ul>
+    <li class="message" (click)="doAction($event)"
+      *ngFor="let item of content">{{item}}</li>
+  </ul>
+</div>
+
+
+
+
+▼リスト4-10　※スクリプト冒頭のimport 文に以下の文を追記する。
+import { MycheckService } from '../mycheck.Service';
+
+▼リスト4-10――message.component.ts
+export class MessageComponent implements OnInit {
+  @Input() content:string[];
+
+  constructor(private service:MycheckService) {
+    this.content = [];
+  }
+
+  ngOnInit() {
+    this.content.push(this.service.hello());
+  }
+
+  push(item:string) {
+    this.service.name = item;
+    this.content.push(this.service.hello());
+  }
+  pop() {
+    this.content.pop();
+  }
+}
+
+
+
+
+▼リスト4-11
+export class MycheckService {
+  private data:string[];
+
+  constructor() {
+    this.data = [];
+  }
+
+  push(item:string) {
+    this.data.push(item);
+  }
+  pop() {
+    this.data.pop();
+  }
+  get(n:number) {
+    return this.data[n];
+  }
+  get size() {
+    return this.data.length;
+  }
+  get json() {
+    return JSON.stringify(this.data);
+  }
+  get list() {
+    return JSON.parse(JSON.stringify(this.data));
+  }
+}
+
+
+
+
+▼リスト4-12
+export class AppModule {
+  
+  constructor(private service:MycheckService) {
+    service.push("Taro");
+    service.push("Hanako");
+    service.push("Sachiko");
+
+  } 
+}
+
+
+
+
+▼リスト4-13――hello.component.ts
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor(private service:MycheckService) { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'data size: ' + this.service.size;
+  }
+
+}
+
+
+
+
+▼リスト4-14――message.component.ts
+export class MessageComponent implements OnInit {
+  content:string[];
+  
+  constructor(private service:MycheckService) {}
+
+  ngOnInit() {
+    this.content = this.service.list;
+  }
+
+}
+
+
+
+
+▼リスト4-15――hello.component.ts
+@Component({
+  selector: 'app-hello',
+  styleUrls: ['./hello.component.css'],
+  templateUrl: './hello.component.html',
+  providers: [MycheckService],
+})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor(private service:MycheckService) {
+    service.push('hello data');
+  }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = this.service.json;
+  }
+}
+
+
+
+
+▼リスト4-16――message.component.ts
+@Component({
+  selector: 'app-message',
+  templateUrl: './message.component.html',
+  styleUrls: ['./message.component.css'],
+  providers: [MycheckService],
+})
+export class MessageComponent implements OnInit {
+  content:string[];
+  
+  constructor(private service:MycheckService) {
+    service.push('message data');
+  }
+
+  ngOnInit() {
+    this.content = this.service.list;
+  }
+}
+
+
+
+
+▼リスト4-17　※スクリプト冒頭に以下のimport 文を追加
+import { RouterModule, Routes } from '@angular/router';
+
+▼リスト4-17
+const routes:Routes = [
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg', component: MessageComponent },
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent,
+    MessageComponent,
+    MystyleDirective
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: true } // デバッグ用
+    )
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  
+  constructor() { } 
+
+}
+
+
+
+
+▼リスト4-18
+<body>
+  <app-root></app-root>
+</body>
+
+
+
+
+▼リスト4-19
+body { 
+  padding:0px; 
+  margin:0px;
+}
+
+
+
+
+▼リスト4-20
+<nav>
+  <div>
+    <a routerLink="">Home</a>|
+    <a routerLink="hello">Hello</a>|
+    <a routerLink="msg">Message</a>
+  </div>
+</nav>
+<div class="content">
+  <router-outlet><p>Router-Outlet</p></router-outlet>
+  <hr>
+  <p>This is angular sample page.</p>
+</div>
+
+
+
+
+▼リスト4-21
+nav {
+  color:white;
+  margin:0px;
+  padding:2px 5px;
+  font-size:12pt;
+  font-weight:bold;
+  background-color: blueviolet;
+}
+nav a { text-decoration: none; }
+nav a:link { color: white; }
+nav a:visited { color: white; }
+nav a:hover { color: lightcyan; }
+nav a:active { color: lightcyan; }
+
+div.content {
+  margin:10px;
+}
+
+
+
+
+▼リスト4-22
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'sample message.';
+  }
+
+}
+
+
+
+
+▼リスト4-23
+<div id="body">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+</div>
+
+
+
+
+▼リスト4-24
+<div class="content">
+  <router-outlet><p>Router-Outlet</p></router-outlet>
+  <hr>
+  <p (click)="doClick()">This is angular sample page.</p>
+</div>
+
+
+
+
+▼リスト4-25　※スクリプト冒頭に以下のimport 文を追加
+import { Router } from '@angular/router';
+
+▼リスト4-25
+export class AppComponent {
+  title = 'angular-app';
+
+  constructor(private router:Router) { }
+  
+  doClick() {
+    this.router.navigate(['']);
+  }
+
+}
+
+
+
+
+▼リスト4-26
+<div class="content">
+  <p>Router-Outlet</p>
+  <router-outlet><p>{{message}}</p></router-outlet>
+  <hr>
+  <p>This is angular sample page.</p>
+</div>
+
+
+
+
+▼リスト4-27　※スクリプト冒頭の以下のimport 文を修正
+import { Router, NavigationStart } from '@angular/router';
+
+▼リスト4-27
+export class AppComponent {
+  title = 'angular-app';
+  message = '';
+
+  constructor(private router:Router) {
+    router.events.subscribe(event => {
+      if(event instanceof NavigationStart) {
+        this.navigate(event);
+      }
+    });
+  }
+  
+  navigate(event) {
+    this.message = event.url;
+  }
+}
+
+
+
+
+▼リスト4-28
+const routes:Routes = [
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg/:id', component: MessageComponent },
+];
+
+
+
+
+▼リスト4-29
+<nav>
+  <div>
+    <a routerLink="">Home</a>|
+    <a [routerLink]="['hello',{name:'taro'}]">Hello</a>|
+    <a [routerLink]="['msg', '123']">Message</a>
+  </div>
+</nav>
+
+
+
+
+▼リスト4-30　※スクリプト冒頭に以下のimport 文を追加
+import { ActivatedRoute } from '@angular/router';
+
+▼リスト4-30
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor( private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'params: ' +
+      JSON.stringify(this.route.snapshot.paramMap);
+  }
+
+}
+
+
+
+
+▼リスト4-31
+<a [routerLink]="['hello']" [queryParams]="{id:123,name:'taro'}">Query</a>|
+
+
+
+
+▼リスト4-32
+ngOnInit() {
+  this.title = 'Hello-app';
+  this.message = 'params: ' +
+    JSON.stringify(this.route.snapshot.queryParamMap);
+}
+
+
+
+
+▼リスト4-33　※スクリプト冒頭に以下のimport 文を追加
+import { ActivatedRoute } from '@angular/router';
+
+▼リスト4-33
+export class MessageComponent implements OnInit {
+  content:string[];
+  
+  constructor(private service:MycheckService, private route: ActivatedRoute) {
+    service.push('message data');
+  }
+
+  ngOnInit() {
+    this.service.push('params: ' +
+      JSON.stringify(this.route.snapshot.paramMap));
+    this.content = this.service.list;
+  }
+
+}
+
+
+
+
+▼リスト4-34　※スクリプト冒頭に以下のimport 文を追加
+import { HttpClientModule } from '@angular/common/http';
+
+▼リスト4-34
+const routes:Routes = [
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg', component: MessageComponent },
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent,
+    MessageComponent,
+    MystyleDirective
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule, // ★
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes)
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  
+  constructor() { } 
+
+}
+
+
+
+
+▼リスト4-35
+<nav>
+  <div>
+    <a routerLink="">Home</a>|
+    <a [routerLink]="['hello']">Hello</a>|
+    <a [routerLink]="['msg']">Message</a>
+  </div>
+</nav>
+
+
+
+
+▼リスト4-36
+{
+  "data":"this is sample data."
+}
+
+
+
+
+▼リスト4-37　※スクリプト冒頭に以下のimport 文を追加
+import { HttpClient } from '@angular/common/http';
+
+▼リスト4-37
+class MyData {
+  data:string;
+}
+
+@Component({
+  ……略……
+  providers: [MycheckService],
+})
+export class HelloComponent implements OnInit {
+  title:string;
+  message:string;
+
+  constructor(private client: HttpClient) { }
+  
+  ngOnInit() {
+    this.title = 'Hello-app';
+    this.message = 'wait...';
+    setTimeout(()=>this.getData(), 5000);
+
+  }
+
+  getData() {
+    this.client.get('/assets/data.json')
+    .subscribe((result:MyData) => {
+      this.message = 'data: ' + result.data;
+    });
+  }
+
+}
+
+
+
+
+▼リスト4-38
+{
+  "data":"this is sample data.",
+  "list":[
+    {"name":"Taro", "mail":"taro@yamada", "tel":"090-999-999"},
+    {"name":"Hanako", "mail":"hanako@flower", "tel":"080-888-888"},
+    {"name":"Sachiko", "mail":"sachiko@happy", "tel":"070-777-777"},
+    {"name":"Mami", "mail":"mami@mumemo", "tel":"060-666-666"},
+    {"name":"Jiro", "mail":"jiro@change", "tel":"050-555-555"}
+  ]
+}
+
+
+
+
+▼リスト4-39
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+class MyData {
+  data:string = '';
+  list:Person[] = [];
+}
+class Person {
+  name:string;
+  mail:string;
+  tel:string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MycheckService {
+  private mydata:MyData = new MyData();
+
+  constructor(private client:HttpClient) {
+    this.client.get('/assets/data.json')
+    .subscribe((result:MyData) => {
+      this.mydata = result;
+    });
+  }
+
+  get(n:number) {
+    return this.mydata.list[n];
+  }
+
+  get size() {
+    return this.list.length;
+  }
+
+  get list() {
+    return this.mydata.list;
+  }
+
+  get data() {
+    return this.mydata.data;
+  }
+}
+
+
+
+
+▼リスト4-40　※スクリプトの冒頭に以下のimport 文を追加
+import { FormControl } from '@angular/forms';
+
+▼リスト4-40――message.component.tsのMessageComponentクラス定義
+export class MessageComponent implements OnInit {
+  input:FormControl;
+  message:string;
+  
+  constructor(private service:MycheckService) {}
+
+  ngOnInit() {
+    this.input = new FormControl('');
+    this.message = 'mydata list.';
+  }
+
+  getData() {
+    return this.service.data;
+  }
+  getList() {
+    return this.service.list;
+  }
+
+  doAction(){
+    let n = parseInt(this.input.value);
+    let p = this.service.get(n);
+    this.message = JSON.stringify(p);
+  }
+
+}
+
+
+
+
+▼リスト4-41――message.component.html
+<div style="margin:10px;">
+  <p>{{message}}</p>
+  <input type="text" [formControl]="input">
+  <button (click)="doAction()">click</button>
+</div>
+<div class="container">
+  <p class="message">{{getData()}}</p>
+  <table>
+    <tr>
+      <th>name</th>
+      <th>mail</th>
+      <th>tel</th>
+    </tr>
+    <tr *ngFor="let item of getList()">
+      <td>{{item.name}}</td>
+      <td>{{item.mail}}</td>
+      <td>{{item.tel}}</td>
+    </tr>
+  </table>
+</div>
+
+
+
+
+
+▼リスト4-42――message.component.css
+.container {
+  padding:20px;
+  margin:10px;
+  border: 1px solid red;
+}
+.message {
+  color:#666;
+  font-size: 12pt;
+  font-weight: bold;
+}
+p {
+  font-size:14pt;
+}
+
+th {
+  border:1px solid white;
+  padding:5px 10px;
+  color:white;
+  background-color: #696;
+}
+td {
+  border:1px solid white;
+  font-size:14pt;
+  padding:5px 10px;
+  color:#363;
+  background-color:#e9e9e9;
+}
+
+
+
+
+▼リスト4-43
+constructor(private client:HttpClient) {
+  fetch('/assets/data.json')
+    .then((resp)=>{
+      resp.json().then((val)=>{
+        this.mydata = val;
+      });
+    });
+}
+
+
+
+
+▼リスト4-44　※スクリプトの冒頭に以下のimport 文を追加
+import { from } from 'rxjs';
+
+▼リスト4-44
+constructor(private client:HttpClient) {
+  let ob:Observable = from(fetch('/assets/data.json'));
+  ob.subscribe((resp)=>{
+    resp.json().then((val)=>{
+      this.mydata = val;
+    });
+  });
+}
+
+
+
+▼リスト4-45　※スクリプトに以下のimport 文を追加
+import { fromEvent } from 'rxjs';
+
+▼リスト4-45　※スクリプトの以下のimport文を修正
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+　　　　　　　　　　　　　　　↓
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+
+▼リスト4-45　MessageComponentクラスの定義部分を修正
+export class MessageComponent implements OnInit {
+  input:FormControl;
+  message:string;
+  @ViewChild('btn') btn: ElementRef;
+  
+  constructor(private service:MycheckService) {}
+
+  ngOnInit() {
+    this.input = new FormControl('');
+    this.message = 'mydata list.';
+    const btn = this.btn.nativeElement;
+    fromEvent(btn, 'click')
+      .subscribe((event:MouseEvent) =>{
+        this.doAction();
+      });
+  }
+
+  getData() {……略……}
+  getList() {{……略……}
+  doAction(){{……略……}
+}
+
+
+
+
+▼リスト4-46
+get list() {
+  return this.mydata.list
+    .map((v)=>{
+      v.name = '*****';
+      return v;
+    });
+}
+
+
+
+
+▼リスト4-47　※スクリプトの冒頭に以下のimport 文を追加
+import { map, filter } from 'rxjs/operators';
+
+▼リスト4-47
+export class MycheckService {
+  private mydata;
+
+  constructor(private client:HttpClient) {
+    this.        updateData(true);
+    this.mydata = new MyData();
+  }
+
+  updateData(f:boolean) {
+    this.client.get('/assets/data.json')
+    .pipe(
+      map((res:Response)=>{
+        return f ? res : null;
+      })
+    )
+    .subscribe((result) => {
+      if (result != null){
+        this.mydata = result;
+      } else {
+        this.mydata = new MyData();
+      }
+    });
+  }
+
+  get(n:number) {
+    return this.mydata.list[n];
+  }
+
+  get size() {
+    return this.list.length;
+  }
+
+  get list() {
+    return this.mydata.list;
+  }
+
+  get data() {
+    return this.mydata.data;
+  }
+}
+
+
+
+▼リスト4-48　※スクリプトの冒頭に以下のimport 文を追加
+import { filter } from 'rxjs/operators';
+
+▼リスト4-48――message.component.tsのMessageComponentクラスの定義部分
+export class MessageComponent implements OnInit {
+  input:FormControl;
+  message:string;
+  @ViewChild('btn') btn: ElementRef;
+  
+  constructor(private service:MycheckService) {}
+
+  ngOnInit() {
+    this.input = new FormControl('');
+    this.message = 'mydata list.';
+    const btn = this.btn.nativeElement;
+    fromEvent(btn, 'click')
+      .pipe(filter((res:MouseEvent, n:number)=>{
+        console.log(n);
+        if (res.shiftKey){
+          return false;
+        }
+        return true;
+      }))
+      .subscribe((event:MouseEvent) =>{
+        this.doAction();
+      });
+  }
+
+  updateData(ck) {
+    this.service.updateData(ck);
+  }
+
+  getData() {
+    return this.service.data;
+  }
+  getList() {
+    return this.service.list;
+  }
+
+  doAction(){
+    let n = parseInt(this.input.value);
+    let p = this.service.get(n);
+    this.message = JSON.stringify(p);
+  }
+
+}
+
+
+
+
+▼リスト4-49――message.component.html
+<div style="margin:10px;">
+  <p>{{message}}</p>
+  <div><label>
+    <input #check type="checkbox" 
+      (change)="updateData(check.checked)" 
+      checked>show all data.
+  </label></div>
+  <input type="text" [formControl]="input">
+  <button #btn>click</button>
+</div>
+
+
+
+
+▼リスト4-50
+get list() {
+  return this.mydata.list
+    .filter((v, k)=>{
+      return k % 2 == 0 ? true : false;
+    });
+}
+
+
+
+
+▼リスト5-1　※スクリプトの冒頭に以下のimport 文があるか確認（なければ追加）
+import { MaterialComponent } from './material/material.component';
+
+▼リスト5-1
+const routes:Routes = [
+  { path: 'material', component: MaterialComponent },
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg', component: MessageComponent },
+];
+
+
+
+
+▼リスト5-2
+<nav>
+  <div>
+    <a routerLink="">Home</a>|
+    <a [routerLink]="['material']">Material</a>|
+    <a [routerLink]="['hello']">Hello</a>|
+    <a [routerLink]="['msg']">Message</a>
+  </div>
+</nav>
+
+
+
+
+▼リスト5-3
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+
+
+
+
+▼リスト5-4
+imports: [
+    BrowserModule,
+    MatButtonModule, // この文を追加
+    MatIconModule, // この文を追加
+    ……以下略……
+],
+
+
+
+
+▼リスト5-5
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-button.</h2>
+    <button mat-button>button</button>
+    <button mat-raised-button>raised button</button>
+    <button mat-flat-button>flat button</button>
+    <button mat-stroked-button>stroked button</button>
+  </div>
+</div>
+
+
+
+
+▼リスト5-6
+.container {
+  background-color: aliceblue;
+  padding:0px 10px;
+}
+.container div{
+  padding: 10px 0px;
+}
+.message {
+  font-size:14pt;
+}
+
+h1 {
+  position: relative;
+  text-align: right;
+  margin-top:-50px;
+}
+button {
+  margin: 10px;
+}
+
+
+
+
+▼リスト5-7
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-button.</h2>
+    <button mat-button color="primary">Primary</button>
+    <button mat-button color="accent">Accent</button>
+    <button mat-button color="warn">Warn</button>
+    <br>
+    <button mat-raised-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button color="warn">Warn</button>
+  </div>
+</div>
+
+
+
+
+▼リスト5-8
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-button.</h2>
+    <button mat-icon-button>
+        <mat-icon>home</mat-icon>
+    </button>
+    <button mat-fab>fab</button>
+    <button mat-mini-fab>fab</button>
+  </div>
+</div>
+
+
+
+
+▼リスト5-9
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+
+
+
+▼リスト5-10
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-button.</h2>
+    <mat-button-toggle-group #tgl="matButtonToggleGroup"
+      (change)="change(tgl.value)">
+      <mat-button-toggle value="one">One</mat-button-toggle>
+      <mat-button-toggle value="two">Two</mat-button-toggle>
+      <mat-button-toggle value="three">Three</mat-button-toggle>
+      <mat-button-toggle value="four">Four</mat-button-toggle>
+      <mat-button-toggle value="five">Five</mat-button-toggle>
+    </mat-button-toggle-group>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-11
+export class MaterialComponent implements OnInit {
+  message:string
+
+  constructor() { }
+
+  ngOnInit() {
+    this.message = 'please select button.';
+  }
+
+  change(v) {
+    this.message = 'select: "' + v + '".';
+  }
+
+}
+
+
+
+
+▼リスト5-12
+import {MatInputModule} from '@angular/material/input';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
+
+
+
+
+▼リスト5-13
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl">
+      <div><mat-form-field>
+        <input type="text" matInput matType="text" 
+          formControlName="name"
+          placeholder="your name">
+      </mat-form-field></div>
+      <div><mat-form-field>
+        <input type="number" matInput matType="number" 
+          formControlName="number"
+          placeholder="0">
+      </mat-form-field></div>
+      <div><mat-form-field>
+        <input type="email" matInput matType="email" 
+          formControlName="email"
+          placeholder="mail address">
+      </mat-form-field></div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-14　※スクリプトの冒頭に以下のimport 文を追加
+import { FormControl, FormGroup } from '@angular/forms';
+
+▼リスト5-14
+export class MaterialComponent implements OnInit {
+  message:string;
+  myControl:FormGroup;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.message = 'please select button.';
+    this.myControl = new FormGroup({
+      name: new FormControl(''),
+      number: new FormControl(0),
+      email: new FormControl(''),
+    });
+  }
+
+  click() {
+    this.message = JSON.stringify(this.myControl.value);
+  }
+
+}
+
+
+
+
+▼リスト5-15
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
+
+
+▼リスト5-16
+import {MatRadioModule} from '@angular/material/radio';
+
+
+
+
+▼リスト5-17
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl">
+      <div><mat-checkbox formControlName="check">
+        Checkbox</mat-checkbox></div>
+      <div></div>
+      <div><mat-radio-group formControlName="radio">
+        <mat-radio-button
+          style="margin-right:30px;" value="male">
+          male</mat-radio-button>
+        <mat-radio-button value="female">
+          female</mat-radio-button>
+      </mat-radio-group></div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-18
+ngOnInit() {
+  this.message = 'please select button.';
+  this.myControl = new FormGroup({
+    check: new FormControl(true),
+    radio: new FormControl('male'),
+  });
+}
+
+
+
+
+▼リスト5-19
+import {MatSelectModule} from '@angular/material/select';
+
+
+
+
+▼リスト5-20
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl" style="width:200px;">
+      <div><mat-form-field>
+        <mat-select formControlName="select1">
+          <mat-option value="windows">Windows</mat-option>
+          <mat-option value="macos">macOS</mat-option>
+          <mat-option value="linux">Linux</mat-option>
+        </mat-select>
+      </mat-form-field></div>
+      <div><mat-form-field>
+        <mat-select  formControlName="select2" multiple>
+          <mat-option value="windows">Windows</mat-option>
+          <mat-option value="macos">macOS</mat-option>
+          <mat-option value="linux">Linux</mat-option>
+        </mat-select>
+      </mat-form-field></div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-21
+ngOnInit() {
+  this.message = 'please select button.';
+  this.myControl = new FormGroup({
+    select1: new FormControl(''),
+    select2: new FormControl(''),
+  });
+}
+
+
+
+
+▼リスト5-22
+import {MatSliderModule} from '@angular/material/slider';
+
+
+
+
+▼リスト5-23
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl" style="width:200px;">
+      <div>
+        <mat-slider formControlName="slider1" min="0" 
+          max="100" step="0.1"></mat-slider>
+      </div>
+      <div>
+          <mat-slider formControlName="slider2" min="0" 
+            max="10" step="1" thumbLabel="true"
+            showTick="true" tickInterval="1"></mat-slider>
+      </div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-24
+ngOnInit() {
+  this.message = 'please select button.';
+  this.myControl = new FormGroup({
+    slider1: new FormControl(''),
+    slider2: new FormControl(''),
+  });
+}
+
+
+
+
+▼リスト5-25　以下を修正
+import { MatButtonModule } from '@angular/material';
+　　　　　　↓
+import { MatButtonModule, MatNativeDateModule } from '@angular/material';
+
+▼リスト5-25　以下を追加
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+▼リスト5-25　@NgModule のimports 部分に以下の2つの値を追加
+MatDatepickerModule
+MatNativeDateModule
+
+
+
+
+▼リスト5-26
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl" style="width:200px;">
+      <div><mat-form-field>
+          <input matInput [matDatepicker]="picker" 
+            placeholder="pick a date." formControlName="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field></div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-27
+ngOnInit() {
+  this.message = 'please select button.';
+  this.myControl = new FormGroup({
+    picker1: new FormControl(new Date()),
+  });
+}
+
+
+
+
+▼リスト5-28
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a mat-icon-button routerLink="">
+      <mat-icon>home</mat-icon>
+    </a>
+    <span style="flex:auto;"></span>
+    <span>Custom Toolbar</span>
+    <span style="flex:auto;"></span>
+    <a mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<nav>
+  <div>
+    <a routerLink="">Home</a>｜
+    <a [routerLink]="['material']">Material</a>｜
+    <a [routerLink]="['hello']">Hello</a>｜
+    <a [routerLink]="['msg']">Message</a>
+  </div>
+</nav>
+<div class="content">
+  <p>{{message}}</p>
+  <router-outlet></router-outlet>
+  <mat-divider></mat-divider>
+  <p>This is angular sample page.</p>
+</div>
+
+
+
+
+▼リスト5-29
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatDividerModule } from '@angular/material/divider';
+
+
+▼リスト5-29　@NgModule のimports 部分に以下の項目を追加
+MatToolbarModule
+MatDividerModule
+
+
+
+
+▼リスト5-30
+import { MatCardModule } from '@angular/material/card';
+
+
+
+
+▼リスト5-31
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <mat-card>
+        <mat-card-title>Card Layout</mat-card-title>
+        <mat-card-subtitle>this is sub title text.</mat-card-subtitle>
+      <mat-card-content>
+        This is card layout contents.
+        これは、カードレイアウトのコンテンツです。
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary">OK</button>
+        <button mat-flat-button color="accent">Continue</button>
+        <button mat-flat-button color="warn">Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+    <p class="message">This is not included in the card layout.</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-32
+import { MatExpansionModule } from '@angular/material/expansion';
+
+
+
+
+▼リスト5-33
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            First Panel
+          </mat-panel-title>
+          <mat-panel-description>
+            This is first panel.
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <h2>First Panel</h2>
+          <p>これは１つ目のパネルのコンテンツです。</p>
+        </div>
+        <mat-action-row>
+          <button mat-button>click</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Second Panel
+            </mat-panel-title>
+            <mat-panel-description>
+              This is second panel.
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Second Panel</h2>
+            <p>これは２つ目のパネルのコンテンツです。</p>
+          </div>
+        </mat-expansion-panel>
+    </mat-accordion> 
+
+    <p class="message">This is not included in the panel.</p>
+  </div>
+</div>
+
+
+
+
+▼リスト5-34
+import { MatListModule } from '@angular/material/list';
+
+
+
+
+▼リスト5-35
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <p>navigation list</p>
+    <form [formGroup]="myControl">
+    <mat-card>
+      <mat-nav-list>
+        <a mat-list-item routerLink="">Top page</a>
+        <a mat-list-item routerLink="/hello">Hello</a>
+        <a mat-list-item routerLink="/msg">Message</a>
+      </mat-nav-list>
+    </mat-card>
+    <p>selection list</p>
+    <mat-card>
+      <mat-selection-list formControlName="list1">
+        <mat-list-option value="win">Windows</mat-list-option>
+        <mat-list-option value="mac">macOS</mat-list-option>
+        <mat-list-option value="lix">Linux</mat-list-option>
+      </mat-selection-list>
+    </mat-card>
+  </form>
+  </div>
+  <p>{{message}}</p>
+  <button mat-button (click)="click()">click</button>
+</div>
+
+
+
+
+▼リスト5-36
+export class MaterialComponent implements OnInit {
+  message:string;
+  myControl:FormGroup;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.message = 'please select list.';
+    this.myControl = new FormGroup({
+      list1: new FormControl(''),
+    });
+  }
+
+  click() {
+    this.message = JSON.stringify(this.myControl.value);
+  }
+
+}
+
+
+
+
+▼リスト5-37
+import {MatSortModule} from '@angular/material/sort';
+
+
+
+
+▼リスト5-38
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <p>sorted table</p>
+    <mat-card>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="mail">Mail</th>
+          <th mat-sort-header="tel">Tel</th>
+          <th mat-sort-header="age">Age</th>
+        </tr>
+      
+        <tr *ngFor="let item of sortedData">
+          <td>{{item.name}}</td>
+          <td>{{item.mail}}</td>
+          <td>{{item.tel}}</td>
+          <td>{{item.age}}</td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+▼リスト5-39　※スクリプトの冒頭に以下のimport 文を追加
+import {Sort} from '@angular/material';
+
+▼リスト5-39
+export interface People {
+  name:string;
+  mail:string;
+  tel:string;
+  age:number;
+}
+
+@Component({……略……})
+export class MaterialComponent implements OnInit {
+  message:string;
+  data:People[];
+  sortedData:People[];
+
+  constructor() { }
+
+  ngOnInit() {
+    this.data = [
+      {name:'Taro',mail:'taro@yamada', tel:'090-999-999', age:35},
+      {name:'Hanako',mail:'hanako@flower', tel:'080-888-888', age:27},
+      {name:'Sachiko',mail:'sachico@happy', tel:'070-777-777', age:49},
+      {name:'Mami',mail:'mami@mumemo', tel:'060-666-666', age:18},
+      {name:'Jiro',mail:'jiro@change', tel:'050-555-555', age:52},
+    ];
+    this.sortedData = this.data.slice();
+  }
+
+  sortData(sort: Sort) {
+    const data = this.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const asc = sort.direction == 'asc' ? 1 : -1;
+      switch (sort.active) {
+        case 'name': return (a.name < b.name ? 1 : -1) * asc;
+        case 'mail': return (a.mail < b.mail ? 1 : -1) * asc;
+        case 'tel': return (a.tel < b.tel ? 1 : -1) * asc;
+        case 'age': return (a.age < b.age ? 1 : -1) * asc;
+        default: return 0;
+      }
+    });
+  }
+}
+
+
+
+
+▼リスト5-40
+import { MatTabsModule } from '@angular/material/tabs';
+
+
+
+
+▼リスト5-41
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <p>navigation list</p>
+    <mat-card>
+      <mat-tab-group>
+        <mat-tab label="First">
+          <h2>First tab</h2>
+          <p>これは、最初のタブのコンテンツです。</p>
+        </mat-tab>
+        <mat-tab label="Second">
+          <h2>Second tab</h2>
+          <p>これは、真ん中のタブのコンテンツです。</p>
+        </mat-tab>
+        <mat-tab label="Third">
+          <h2>Third tab</h2>
+          <p>これは、最後のタブのコンテンツです。</p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+▼リスト5-42
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+
+
+
+
+▼リスト5-43
+import { MaterialComponent, MysheetComponent } from './material/material.component';
+
+
+
+
+▼リスト5-44
+entryComponents: [
+  MysheetComponent,
+],
+
+
+
+
+▼リスト5-45
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <p>{{message}}</p>
+    <div>
+      <button mat-raised-button 
+        (click)="showSheet()">Click</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+▼リスト5-46
+import { Component, OnInit } from '@angular/core';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import { Router } from '@angular/router'
+
+@Component({
+  selector: 'app-material',
+  templateUrl: './material.component.html',
+  styleUrls: ['./material.component.css']
+})
+export class MaterialComponent implements OnInit {
+  message:string;
+  
+  constructor(private bottomSheet: MatBottomSheet) { }
+
+  ngOnInit() {
+    this.message ="bottom sheet.";
+  }
+
+  showSheet() { 
+    this.bottomSheet.open(MysheetComponent);
+  }
+}
+
+@Component({
+  selector: 'app-mysheet',
+  template: `
+  <h2>Select item</h2>
+  <mat-action-list>
+    <button mat-list-item 
+      (click)="click('')">Top Page</button>
+    <button mat-list-item 
+      (click)="click('hello')">Hello</button>
+    <button mat-list-item 
+      (click)="click('msg')">Message</button>
+  </mat-action-list>
+  `,
+})
+export class MysheetComponent {
+
+  constructor(private router:Router, 
+    private bottomSheetRef: 
+    MatBottomSheetRef<MysheetComponent>) {}
+  
+  click(path:string): void {
+    this.bottomSheetRef.dismiss();
+    this.router.navigate([path]);
+  }
+}
+
+
+
+
+▼リスト5-47
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
+
+▼リスト5-48
+import { MaterialComponent, MyDlogComponent } from './material/material.component';
+
+
+
+
+▼リスト5-49
+<button mat-raised-button (click)="showDlog()">Click</button>
+
+
+
+
+▼リスト5-50
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } 
+    from '@angular/material';
+
+interface DialogData {
+  input: string;
+  name: string;
+  pass: string;
+}
+
+@Component({
+  selector: 'app-material',
+  templateUrl: './material.component.html',
+  styleUrls: ['./material.component.css']
+})
+export class MaterialComponent implements OnInit {
+  message:string;
+  
+  constructor(private dialog: MatDialog) { }
+
+  ngOnInit() {
+    this.message ="dialog.";
+  }
+
+  showDlog() { 
+    const dialogRef = this.dialog.open(MyDlogComponent, {
+      width: '400px',
+      data: { name:'?', pass:'' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.message = JSON.stringify(result);
+    });
+  }
+}
+
+@Component({
+  selector: 'app-mydlog',
+  template: `
+  <mat-dialog-content style="height:250px;">
+    <p>please input:</p>
+    <mat-form-field>
+      <input placeholder="name" type="text" matInput 
+          [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="password" type="password" 
+          matInput [(ngModel)]="data.pass">
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="data">OK</button>
+      <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+  </mat-dialog-content>
+  `,
+})
+export class MyDlogComponent {
+  
+  constructor(public dialogRef: MatDialogRef<MyDlogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data:DialogData) {}
+  
+  cancel() {
+    this.dialogRef.close();
+  }
+}
+
+
+
+
+▼リスト6-1
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
+
+
+
+
+▼リスト6-2
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+
+
+
+▼リスト6-3
+var config = {
+  apiKey: "……APIキー……",
+  authDomain: "……authのドメイン名……",
+  databaseURL: "……データベースのURL……",
+  projectId: "……プロジェクトID……",
+  storageBucket: "……バケットの指定……",
+  messagingSenderId: "……メッセージID……"
+}
+
+
+
+
+▼リスト6-4
+const routes:Routes = [
+  { path: 'fire', component: FireComponent },
+  { path: 'material', component: MaterialComponent },
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg', component: MessageComponent },
+];
+
+
+
+
+▼リスト6-5
+<nav>
+  <div>
+    <a routerLink="">Home</a>｜
+    <a [routerLink]="['fire']">Firebase</a>｜
+    <a [routerLink]="['material']">Material</a>｜
+    <a [routerLink]="['hello']">Hello</a>｜
+    <a [routerLink]="['msg']">Message</a>
+  </div>
+</nav>
+
+
+
+
+▼リスト6-6
+<div class="container">
+  <h1>Firebase works!</h1>
+  <div>
+    <p>{{message}}</p>
+  </div>
+</div>
+
+
+
+
+▼リスト6-7
+.container {
+  background-color: aliceblue;
+  padding:0px 10px;
+}
+.container div{
+  padding: 10px 0px;
+}
+.message {
+  font-size:14pt;
+}
+h1 {
+  position: relative;
+  text-align: right;
+  margin-top:-50px;
+}
+button {
+  margin-right:10px;
+}
+th {
+  background-color: lightblue;
+  border:1px solid aliceblue;
+  padding:5px 20px;
+}
+td {
+  background-color: white;
+  border:1px solid aliceblue;
+  font-size:14pt;
+  padding:5px 20px;
+
+}
+
+
+
+
+▼リスト6-8
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+@Component({
+  selector: 'app-fire',
+  templateUrl: './fire.component.html',
+  styleUrls: ['./fire.component.css']
+})
+export class FireComponent implements OnInit {
+  message:string = 'wait...';
+
+  constructor(private db:AngularFirestore) { }
+
+  ngOnInit() {
+    this.db.collection('sampledata')
+      .doc('sampledoc')
+      .valueChanges()
+      .subscribe((value)=>{
+        if (value != null) {
+          this.message = value['message'];
+        }
+      });
+  }
+
+}
+
+
+
+
+▼リスト6-9
+<div class="container">
+  <h1>Firebase works!</h1>
+  <div>
+    <p>{{message}}</p>
+    <mat-form-field style="width:400px;">
+      <input matInput [(ngModel)]="input" 
+        placeholder="message">
+    </mat-form-field>
+    <div><button mat-raised-button 
+      (click)="click()">Save</button></div>
+  </div>
+</div>
+
+
+
+
+▼リスト6-10
+input:string = '';
+
+click() {
+  this.db.collection('sampledata')
+    .doc('sampledoc')
+    .set({ message:this.input });
+  this.input = '';
+}
+
+
+
+
+▼リスト6-11
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid != null;
+    }
+  }
+}
+
+
+
+
+▼リスト6-12
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <p>{{message}}</p>
+    <button mat-raised-button (click)="login()">login</button>
+    <button mat-raised-button (click)="logout()">logout</button>
+    <p>USER: {{currentUser}}</p>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Mail</th>
+        <th>Age</th>
+      </tr>
+      <tr *ngFor="let item of data">
+        <td>{{ item['name'] }}</td>
+        <td>{{ item['mail'] }}</td>
+        <td>{{ item['age'] }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+
+
+▼リスト6-13
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from "firebase";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+
+@Component({……略……})
+export class FireComponent implements OnInit {
+  message:string = 'people data.';
+  data:any;
+
+  constructor(private db:AngularFirestore, public afAuth: AngularFireAuth) { }
+
+  ngOnInit() {
+    this.access();
+  }
+
+  access() {
+    this.db.collection('people')
+      .valueChanges()
+      .subscribe(value=>{
+        this.data = value;
+      },
+      error=>{
+        this.message = "(can't get data...)";
+        this.data = null;
+      });
+  }
+
+  login(){
+    let provider = new firebase.auth.GoogleAuthProvider();
+    this.afAuth.auth.signInWithRedirect(provider)
+      .then((result)=>{
+        this.access();
+    });
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
+    this.access();
+  }
+
+
+  get currentUser() {
+    return this.afAuth.auth != null ?
+      this.afAuth.auth.currentUser != null? 
+        this.afAuth.auth.currentUser.displayName : 
+        '(not logined.)' :
+      '(not logined.)';
+  }
+}
+
+
+
+
+▼リスト6-14
+<div>
+  <mat-form-field style="margin-right:10px;">
+    <input matInput [(ngModel)]="name" 
+      placeholder="name">
+  </mat-form-field>
+  <mat-form-field style="margin-right:10px;">
+    <input matInput [(ngModel)]="mail" 
+      placeholder="mail">
+  </mat-form-field>
+  <mat-form-field style="margin-right:10px;">
+    <input type="number" matInput  
+      [(ngModel)]="age" placeholder="age">
+  </mat-form-field>
+</div>
+<div>
+  <button mat-stroked-button 
+    (click)="add()">Add</button>
+</div>
+
+
+
+
+▼リスト6-15
+name:string;
+mail:string;
+age:number;
+
+add() {
+  const data = {name:this.name, mail:this.mail, age:this.age};
+  this.db.collection('people').add(data);
+  this.name = '';
+  this.mail = '';
+  this.age = 0;
+}
+
+
+
+
+▼リスト6-16
+<mat-form-field style="margin-right:10px;">
+  <input matInput #input>
+</mat-form-field>
+<button mat-stroked-button (click)="find(input.value)">Get</button>
+
+
+
+
+▼リスト6-17
+find(val) {
+  this.db.collection('people', 
+    ref => ref.where('name', '==', val))
+    .valueChanges()
+    .subscribe(value=>{
+      this.data = value;
+    },
+    error=>{
+      this.message = "(can't get data...)";
+      this.data = null;
+    });
+}
+
+
+
+
+▼リスト6-18
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+import { MatButtonModule } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { AddComponent } from './add/add.component';
+import { ShowComponent } from './show/show.component';
+
+const routes:Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'show/:isbn', component: ShowComponent },
+  { path: 'add', component: AddComponent },
+];
+
+const fire_config = {
+  …………Firebaseプロジェクトの設定…………
+};
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AddComponent,
+    ShowComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatCardModule,
+    MatListModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(fire_config),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireFunctionsModule,
+  ],
+  providers: [
+    { provide: FunctionsRegionToken, useValue: 'us-central1' }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+
+▼リスト6-19
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+▼リスト6-20
+"dependencies": {
+  "firebase-admin": "~7.0.0",
+  "firebase-functions": "^2.2.0"
+},
+
+
+
+
+▼リスト6-21
+"dependencies": {
+  "firebase-admin": "~7.1.1",
+  "firebase-functions": "^2.2.1",
+  "request": "^2.88.0",
+  "request-promise-native": "^1.0.7"
+},
+
+
+
+
+▼リスト6-22
+import * as request from "request";
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
+
+admin.initializeApp();
+const db = admin.firestore();
+
+exports.isbn = functions.https.onCall(
+    (data, context) => {
+      const opt = {
+        url:'https://www.googleapis.com/books/v1/volumes?country=JP&q=' + data.isbn,
+        method: 'GET',
+        json: true
+      } 
+      request(opt, async (error, response, body)=>{
+        if (body.items.length == 0) {
+          return 'ERR';
+        }
+        let gid = body.items[0]['id'];
+        let item = body.items[0].volumeInfo;
+        let isbn10 = 'undefined';
+        if (item.industryIdentifiers[0]['type'] == 'ISBN_10') {
+          isbn10 = item.industryIdentifiers[0]['identifier']
+        }
+        if (item.industryIdentifiers[1]['type'] == 'ISBN_10') {
+          isbn10 = item.industryIdentifiers[1]['identifier']
+        }
+        let obj = {
+          isbn:data.isbn,
+          gid:gid,
+          isbn10: isbn10,
+          author: item.authors == undefined ? 'undefined' : item.authors[0],
+          publisher: item.publisher == undefined ? 'undefined' : item.publisher,
+          title:item.title == undefined ? 'undefined' : item.title,
+          subtitle:item.subtitle == undefined ? 'undefined' : item.subtitle,
+          published:item.publishedDate == undefined ? 'undefined' : item.publishedDate,
+          desc:item.description == undefined ? 'undefined' : item.description,
+          created:new Date().getTime()
+        };
+        await db.collection('books').add(obj);
+        return 'OK';
+      });
+    }
+);
+
+
+
+
+▼リスト6-23――app.component.html
+<div class="base">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-icon-button routerLink="">
+        <mat-icon>home</mat-icon>
+      </a>
+      <span style="flex:auto;"></span>
+      <span>Book Review</span>
+      <span style="flex:auto;"></span>
+      <button mat-icon-button (click)="loginCheck()">
+        <mat-icon>{{currentUser !='(not logined.)' ? 'done' : 'priority_high'}}</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <a mat-fab class="fab" routerLink="add">
+    <mat-icon>add</mat-icon>
+  </a>
+  <p class="user">[ USER: {{currentUser}} ]</p>
+  <div class="content">
+    <router-outlet *ngIf="currentUser !='(not logined.)'"></router-outlet>
+    <mat-divider></mat-divider>
+    <p class="footer">2019 SYODA-Tuyano.</p>
+  </div>
+</div>
+
+
+
+
+▼リスト6-24――app.component.css
+.base {
+  background-color:aliceblue;
+}
+.footer {
+  text-align:center;
+  font-size:10pt;
+  margin:20px;
+}
+.user {
+  cursor: hand;
+  text-align:right;
+  font-size:10pt;
+  font-weight:bold;
+}
+.content {
+  padding:20px;
+}
+.fab {
+  z-index: 100;
+  position:fixed;
+  bottom:50px;
+  right:50px;
+}
+
+
+
+
+▼リスト6-25――app.component.ts
+import { Component, OnInit, NgZone } from '@angular/core';
+import * as firebase from "firebase";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router'
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  title = 'newapp';
+
+  constructor(private router:Router, 
+      private afAuth: AngularFireAuth, 
+      private ngZone: NgZone) {
+  }
+
+  ngOnInit() {
+    this.afAuth.auth.onAuthStateChanged((usr)=>{
+      this.ngZone.run(() => {
+        this.router.navigate(['']);
+      });
+    });
+  }
+
+  loginCheck() {
+    if (this.currentUser == '(not logined.)') {
+      this.login();
+    } else {
+      if (confirm('Are you logout now?')) {
+        this.logout();
+      }
+    }
+  }
+
+  login(){
+    let provider = new firebase.auth.GoogleAuthProvider();
+    this.afAuth.auth.signInWithRedirect(provider);
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['']);
+  }
+
+  get currentUser() {
+    return this.afAuth.auth != null ?
+      this.afAuth.auth.currentUser != null? 
+        this.afAuth.auth.currentUser.displayName : 
+        '(not logined.)' :
+      '(not logined.)';
+  }
+}
+
+
+
+
+▼リスト6-26――home.component.html
+<div>
+  <h1>Book list</h1>
+  <p>{{message}}</p>
+  <mat-card>
+    <mat-nav-list>
+        <a mat-list-item [routerLink]="['show', item.isbn]"
+          *ngFor="let item of data"> {{ item.title }} </a>
+    </mat-nav-list>
+  </mat-card>
+</div>
+
+
+
+
+▼リスト6-27――home.component.ts
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+  message:string;
+  data:any;
+
+  constructor(private store:AngularFirestore, private fns:AngularFireFunctions, private afAuth: AngularFireAuth) { }
+
+  ngOnInit() {
+    this.message = 'wait...';
+    this.data = null;
+    this.getBooks();
+  }
+
+  getBooks() {
+    this.store.collection('books', 
+        ref => ref.orderBy('created','desc').limit(10))
+      .valueChanges()
+      .subscribe(value=>{
+        this.data = value;
+        this.message = 'Book list.'
+      },
+      error=>{
+        this.message = "(can't get data...)";
+        this.data = null;
+      });
+  }
+}
+
+
+
+
+▼リスト6-28――show.component.html
+<div>
+  <h1>Book data</h1>
+  
+  <p>ISBN:{{isbn}} のデータ</p>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{data.title}}</mat-card-title>
+      <mat-card-subtitle>{{data.author}}／{{data.publisher}}</mat-card-subtitle>
+      <mat-card-subtitle>{{data.subtitle}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{data.desc}}</p>
+      <p>[ published {{data.published}}. ISBN: {{isbn}} ]</p>
+      <div class="bookImgFrame">
+        <a target="_target" [href]="'https://www.amazon.co.jp/dp/' + data.isbn10 + '/'">
+          <img class="bookImg" [src]="'http://books.google.com/books/content?id=' + data.gid + '&printsec=frontcover&img=1&zoom=5'">
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <p>Comment:</p>
+  <div>
+    <mat-form-field style="width:300px">
+      <textarea matInput="textarea" [(ngModel)]="comment"></textarea>
+    </mat-form-field>
+    <button mat-raised-button (click)='addComment()'>Send</button>
+  </div>
+  <mat-card>
+    <mat-list>
+      <div class="listItem" *ngFor="let item of comments">
+        {{item.comment}} ({{item.name}})
+      </div>
+    </mat-list>
+  </mat-card>
+  
+</div>
+
+
+
+
+▼リスト6-29――show.component.css
+.listItem {
+  margin-bottom: 10px;
+  padding-bottom:10px;
+  border-bottom: 1px solid lightgray;
+}
+.bookImgFrame {
+  text-align:center;
+}
+.bookImg {
+  border: 1px solid gray;
+}
+button {
+  margin:20px;
+}
+
+
+
+
+▼リスト6-30――show.component.ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+@Component({
+  selector: 'app-show',
+  templateUrl: './show.component.html',
+  styleUrls: ['./show.component.css']
+})
+export class ShowComponent implements OnInit {
+  isbn:string;
+  data:any;
+  comments:any;
+  key:string;
+  message:string = 'wait...';
+  comment:string;
+
+  constructor(private route: ActivatedRoute, 
+      private afAuth: AngularFireAuth, 
+      private store:AngularFirestore) {
+    const param = route.snapshot.paramMap;
+    this.isbn = param['params']['isbn'];
+  }
+
+  ngOnInit() {
+    this.getBook();
+  }
+
+  getBook() {
+    this.store.collection('books', 
+        ref => ref.where('isbn','==',this.isbn))
+      .snapshotChanges()
+      .subscribe(value=>{
+        if (value[0] == undefined) {
+          this.message = "(can't get data...)";
+          this.data = null;
+          return;
+        }
+        this.key = value[0].payload.doc.id;
+        this.data = value[0].payload.doc.data();
+        this.message = 'Book data.';
+        this.getComments();
+      },
+      error=>{
+        this.message = "(can't get data...)";
+        this.data = null;
+      });
+  }
+
+  getComments() {
+    this.store.collection('books')
+      .doc(this.key).collection('comments', 
+        ref => ref.orderBy('posted','desc').limit(30))
+      .valueChanges()
+      .subscribe(value=>{
+        this.comments = value;
+      },
+      error=>{
+        this.comments = null;
+      });
+  }
+
+  addComment() {
+    const name = this.afAuth.auth.currentUser.displayName;
+    const obj = {
+      name: name,
+      comment: this.comment,
+      posted:new Date().getTime()
+    };
+    this.store.collection('books').doc(this.key).collection('comments').add(obj);
+    this.comment = '';
+  }
+
+}
+
+
+
+
+▼リスト6-31――add.component.html
+<div>
+    <h1>Add book.</h1>
+    <p>{{message}}</p>
+    <p>DATA: {{data == null || data.length == 0 ? 'no-data.' : '「' + data.title + '」'}}</p>
+    <div>
+      <mat-form-field>
+        <input matInput [(ngModel)]="isbn" (ngModelChange)="getISBN()" placeholder="ISBN">
+      </mat-form-field>
+      <button [disabled]="data != null || isbn.length != 13" mat-raised-button (click)="add()">Add</button>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+
+
+
+▼リスト6-32――add.component.css
+button {
+  margin:20px;
+}
+
+
+
+
+▼リスト6-33――add.component.ts
+import { Component, OnInit } from '@angular/core';
+import * as firebase from "firebase";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+@Component({
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.css']
+})
+export class AddComponent implements OnInit {
+    message:string;
+    data:any;
+    isbn:string;
+  
+    constructor(private store:AngularFirestore, 
+        private fns:AngularFireFunctions, 
+        private afAuth: AngularFireAuth) { }
+  
+    ngOnInit() {
+      this.message = 'please input ISBN code!';
+      this.data = null;
+      this.isbn = '';
+    }
+  
+    getISBN() {
+      this.store.collection('books',ref => ref.where('isbn', '==', this.isbn))
+      .valueChanges()
+      .subscribe(value=>{
+        if (value.length == 0){
+          this.data = null;
+          this.message = 'can't get data...';
+        } else {
+          this.data = value[0];
+          this.message = 'data found!'
+        }
+      },
+      error=>{
+        console.log(error);
+        this.message = "can't get data...";
+        this.data = null;
+      });
+    }
+  
+    add() {
+      this.message = 'wait...';
+      const call = this.fns.httpsCallable('isbn');
+      call({ isbn:this.isbn })
+      .subscribe(resp => {
+        this.message = "sended! Please wait a few minutes...";
+        this.isbn = '';
+      }, err => {
+        console.error({ err });
+      });
+    }
+  }
+  
+
+
+▼リストA-1
+let msg = 'Hello! This is TypeScript!';
+
+function load() {
+    document.querySelector('#msg').textContent = msg;
+}
+
+
+
+
+▼リストA-2
+<html>
+<head>
+    <script src="ts_script.js"></script>
+</head>
+<body onload="load();">
+    <h1>TypeScript</h1>
+    <p id="msg">wait...</p>
+</body>
+</html>
+
+
+
+
+▼リストA-3
+let lang = 'JavaScript';
+let msg1 = `Hello! This is ${lang}!`;
+lang = 'TypeScript';
+let msg2 = `Hello! This is ${lang}!`;
+
+let msg:string = `「${msg1}」<br>「${msg2}」`
+
+function load() {
+    document.querySelector('#msg').innerHTML = msg;
+}
+
+
+
+
+▼リストA-4
+function calc(n: number, f: Function) {
+    return f(n);
+}
+
+let msg = calc(123, n=>n*n);
+
+function load() {
+    document.querySelector('#msg').innerHTML = msg;
+}
+
+
+
+
+▼リストA-5
+let ob = {
+    name:'Taro',
+    mail:'taro@yamada',
+    age:35,
+    toString: function() {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+function load() {
+    document.querySelector('#msg').innerHTML = ob.toString();
+}
+
+
+
+
+▼リストA-6
+let ob = new Object();
+ob.name = 'Taro';
+ob.mail = 'taro@yamada';
+ob.age = 35;
+ob.toString = function() {
+    return this.name + ',' + this.mail + ',' + this.age;
+}
+
+
+
+
+▼リストA-7
+function Person(nm, ml, ag) {
+    this.name = nm;
+    this.mail = ml;
+    this.age = ag;
+    this.toString = function() {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+var ob = new Person('Taro','taro@yamada',35);
+
+function load() {
+    document.querySelector('#msg').innerHTML = ob.toString();
+}
+
+
+
+
+▼リストA-8
+class  Person {
+    name:string;
+    mail:string;
+    age:number;
+
+    constructor(nm, ml, ag) {
+        this.name = nm;
+        this.mail = ml;
+        this.age = ag;
+    }
+
+    toString() {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+var ob = new Person('Taro','taro@yamada',35);
+
+function load() {
+    document.querySelector('#msg').innerHTML = ob.toString();
+}
+
+
+
+
+▼リストA-9
+class  Person {
+    name:string;
+    mail:string;
+    private _age:number;
+
+    get age() {
+        return this._age;
+    }
+    set age(n:number) {
+        this._age = n < 0 ? 0 : n;
+    }
+
+    constructor(nm, ml, ag) {
+        this.name = nm;
+        this.mail = ml;
+        this.age = ag;
+    }
+
+    toString() {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+var ob = new Person('Taro','taro@yamada',35);
+
+function load() {
+    document.querySelector('#msg').innerHTML = ob.toString();
+}
+
+
+
+
+▼リストA-10
+class  Person {……略……}
+
+
+class Teen extends Person {
+    private __age:number;
+    school:string;
+
+    constructor(nm, ml, ag, sc) {
+        super(nm, ml, ag);
+        this.school = sc;
+    }
+
+    get age() {
+        return this.__age;
+    }
+    set age(n:number) {
+        this.__age = n < 0 ? 0 : n >= 20 ? 19 : n;
+    }
+
+    toString() {
+        return this.name + ',' + this.mail + ','
+            + this.age + ' (' + this.school + ')';
+    }
+}
+
+let taro = new Person('Taro','taro@yamada',35);
+let hanako = new Teen('Hanako','hanako@flower',17,'Tokyo High-school');
+
+function load() {
+    let msg = `<ul>
+    <li>${taro.toString()}</li>
+    <li>${hanako.toString()}</li>
+    </ul>`;
+    document.querySelector('#msg').innerHTML = msg;
+}
+
+
+
+
+▼リストA-11
+interface Printable {
+    print():string;
+}
+
+class  Person implements Printable {
+    name:string;
+    mail:string;
+    private _age:number;
+
+    get age() {
+        return this._age;
+    }
+    set age(n:number) {
+        this._age = n < 0 ? 0 : n;
+    }
+
+    constructor(nm, ml, ag) {
+        this.name = nm;
+        this.mail = ml;
+        this.age = ag;
+    }
+
+    print():string {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+let taro = new Person('Taro','taro@yamada',35);
+let hanako = new Person('Hanako','hanako@flower',17);
+
+function load() {
+    let msg = `<ul>
+    <li>${taro.print()}</li>
+    <li>${hanako.print()}</li>
+    </ul>`;
+    document.querySelector('#msg').innerHTML = msg;
+}
+
+
+
+
+▼リストA-12
+export class Person {
+    name:string;
+    mail:string;
+    private _age:number;
+
+    get age() {
+        return this._age;
+    }
+    set age(n:number) {
+        this._age = n < 0 ? 0 : n;
+    }
+
+    constructor(nm, ml, ag) {
+        this.name = nm;
+        this.mail = ml;
+        this.age = ag;
+    }
+
+    print():string {
+        return this.name + ',' + this.mail + ',' + this.age;
+    }
+}
+
+
+
+
+▼リストA-13
+import { Person } from 'mylib';
+
+let taro = new Person('Taro','taro@yamada',35);
+let hanako = new Person('Hanako','hanako@flower',17);
+
+function load() {
+    let msg = `<ul>
+    <li>${taro.print()}</li>
+    <li>${hanako.print()}</li>
+    </ul>`;
+    document.querySelector('#msg').innerHTML = msg;
+}
+
+load();
+
+
+
+
+▼リストA-14
+<html>
+<head></head>
+<body>
+    <h1>TypeScript</h1>
+    <p id="msg">wait...</p>
+</body>
+<script type="module" src="ts_script.js"></script>
+</html>
