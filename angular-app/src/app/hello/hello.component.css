@@ -12,3 +12,12 @@ h1 {
 p {
   font-size:18pt;
 }
+
+.red {
+  color:white;
+  background-color: red;
+}
+
+.thin { color: #999; }
+.large { font-size:30pt; }
+.frame { border:solid 2px red; }
