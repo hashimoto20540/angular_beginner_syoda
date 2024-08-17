@@ -1,17 +1,30 @@
 <div id="body">
   <h1>{{title}}</h1>
   <p>{{message}}</p>
-  <form [formGroup]="myControl" 
-    (submit)="onSubmit()">
-  <div>
-  <select formControlName="control">
-    <option>Windows</option>
-    <option>macOS</option>
-    <option>Linux</option>
-    <option>ChromeOS</option>
-  </select>  
-  <input type="submit" value="click">
-  </div>
+  <form [(formGroup)]="myControl" 
+    (ngSubmit)="onSubmit()">
+  <table>
+    <tr><th>Name</th><td>
+      <div *ngIf="name.errors != null && name.errors.required != null">
+          Nameは必須項目です.</div>
+      <div><input type="text" formControlName="name"></div>
+    </td></tr>
+    <tr><th>Mail</th><td>
+      <div *ngIf="mail.errors != null && mail.errors.email != null">
+          メールアドレスが必要です.</div>
+      <div><input type="text" formControlName="mail"></div>
+    </td></tr>
+    <tr><th>age</th><td>
+        <div *ngIf="age.errors != null && age.errors.min != null">
+          １歳以上を入力下さい.</div>
+        <div *ngIf="age.errors != null && age.errors.max != null">
+          150歳以下を入力下さい.</div>
+      <input type="number" formControlName="age">
+    </td></tr>
+    <tr><th></th><td>
+      <input [disabled]="myControl.invalid" 
+        type="submit" value="click">
+    </td></tr>
+  </table>
   </form>
-
 </div>
