@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-hello',
@@ -9,32 +9,45 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 export class HelloComponent implements OnInit {
   title:string;
-  message:string;
-  myControl:FormGroup;
-  
-  constructor(private fb: FormBuilder) { }
+  message:string[];
+  lastTarget:any;
+  lastColor:string;
+  input1:string;
+  @ViewChild(MessageComponent)
+  private msgComponent:MessageComponent;
+
+  constructor() { }
 
   ngOnInit() {
     this.title = 'Hello-app';
-    this.message = 'FormControlを使う';
-    this.myControl = this.fb.group({
-      name: ['', [Validators.required]],
-      mail: ['', [Validators.email]],
-      age:[0, [Validators.min(1), Validators.max(150)]]
-    });
+    this.message = ['First item.', 'Second item.', 'Third item.'];
+    this.input1 = '';
   }
 
-  get name() { return this.myControl.get('name'); }
-  get mail() { return this.myControl.get('mail'); }
-  get age() { return this.myControl.get('age'); }
-
-  onSubmit() {
-    if (this.myControl.invalid) {
-      this.message = 'VALIDATION ERROR.';
-    } else {
-      let result = this.myControl.value;
-      this.message = JSON.stringify(result);  
+  push() {
+    if (this.input1 == '') {
+      alert('テキストを入力して下さい。');
+      return;
     }
+    this.msgComponent.push(this.input1);
+    this.input1 = '';
   }
+  pop() {
+    this.msgComponent.pop();
+  }
+
+  doClick(event) {
+    if (this.lastTarget != null){
+      this.lastTarget.style.color = this.lastColor;
+      this.lastTarget.style.backgroundColor = 'white';
+    }
+    this.lastTarget = event.target;
+    this.lastColor = event.target.style.color;
+    event.target.style.color = 'white';
+    event.target.style.backgroundColor = 'red';
+  }
+
 }
-  
+
+
+
