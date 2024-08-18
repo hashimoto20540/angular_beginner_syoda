@@ -9,6 +9,14 @@ import { MystyleDirective } from './mystyle.directive';
 
 import { MycheckService } from './mycheck.service';
 
+import { RouterModule, Routes } from '@angular/router';
+
+
+const routes:Routes = [
+  { path: 'hello', component: HelloComponent },
+  { path: 'msg/:id', component: MessageComponent },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,17 +27,16 @@ import { MycheckService } from './mycheck.service';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: true } // デバッグ用
+    )
   ],
-  providers: [],
-  bootstrap: [HelloComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   
-  constructor(private service:MycheckService) {
-    service.push("Taro");
-    service.push("Hanako");
-    service.push("Sachiko");
+  constructor() { } 
 
-  } 
 }
