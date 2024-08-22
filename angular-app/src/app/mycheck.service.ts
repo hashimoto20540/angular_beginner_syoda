@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { map, filter } from 'rxjs/operators';
+
 class MyData {
   data:string = '';
   list:Person[] = [];
@@ -15,15 +17,27 @@ class Person {
   providedIn: 'root'
 })
 export class MycheckService {
-  private mydata:MyData = new MyData();
+  private mydata;
 
   constructor(private client:HttpClient) {
-    fetch('/assets/data.json')
-      .then((resp)=>{
-        resp.json().then((val)=>{
-          this.mydata = val;
-        });
-      });
+    this.        updateData(true);
+    this.mydata = new MyData();
+  }
+
+  updateData(f:boolean) {
+    this.client.get('/assets/data.json')
+    .pipe(
+      map((res:Response)=>{
+        return f ? res : null;
+      })
+    )
+    .subscribe((result) => {
+      if (result != null){
+        this.mydata = result;
+      } else {
+        this.mydata = new MyData();
+      }
+    });
   }
 
   get(n:number) {
@@ -35,7 +49,10 @@ export class MycheckService {
   }
 
   get list() {
-    return this.mydata.list;
+    return this.mydata.list
+      .filter((v, k)=>{
+        return k % 2 == 0 ? true : false;
+      });
   }
 
   get data() {

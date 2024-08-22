@@ -5,6 +5,8 @@ import { FormControl } from '@angular/forms';
 
 import { fromEvent } from 'rxjs';
 
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -23,9 +25,20 @@ export class MessageComponent implements OnInit {
     this.message = 'mydata list.';
     const btn = this.btn.nativeElement;
     fromEvent(btn, 'click')
+      .pipe(filter((res:MouseEvent, n:number)=>{
+        console.log(n);
+        if (res.shiftKey){
+          return false;
+        }
+        return true;
+      }))
       .subscribe((event:MouseEvent) =>{
         this.doAction();
       });
+  }
+
+  updateData(ck) {
+    this.service.updateData(ck);
   }
 
   getData() {
@@ -42,3 +55,4 @@ export class MessageComponent implements OnInit {
   }
 
 }
+
