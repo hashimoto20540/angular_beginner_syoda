@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>material works!</h1>
+  <div>
+    <h2>material-form.</h2>
+    <form [formGroup]="myControl">
+      <div><mat-form-field>
+        <input type="text" matInput matType="text" 
+          formControlName="name"
+          placeholder="your name">
+      </mat-form-field></div>
+      <div><mat-form-field>
+        <input type="number" matInput matType="number" 
+          formControlName="number"
+          placeholder="0">
+      </mat-form-field></div>
+      <div><mat-form-field>
+        <input type="email" matInput matType="email" 
+          formControlName="email"
+          placeholder="mail address">
+      </mat-form-field></div>
+      <button mat-raised-button
+        (click)="click()">click</button>
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+</div>

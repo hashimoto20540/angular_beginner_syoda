@@ -12,8 +12,18 @@ import { MycheckService } from './mycheck.service';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialComponent } from './material/material.component';
+
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+import {MatInputModule} from '@angular/material/input';
 
 const routes:Routes = [
+  { path: 'material', component: MaterialComponent },
   { path: 'hello', component: HelloComponent },
   { path: 'msg', component: MessageComponent },
 ];
@@ -23,14 +33,20 @@ const routes:Routes = [
     AppComponent,
     HelloComponent,
     MessageComponent,
-    MystyleDirective
+    MystyleDirective,
+    MaterialComponent
   ],
   imports: [
     BrowserModule,
+    MatButtonModule, // この文を追加
+    MatIconModule, // この文を追加
     HttpClientModule, // ★
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatInputModule
   ],
   bootstrap: [AppComponent],
 })
